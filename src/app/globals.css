@@ -1,26 +1,172 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --color-sage-50: #f6f7f4;
+  --color-sage-100: #e8ebe3;
+  --color-sage-200: #d4dac9;
+  --color-sage-300: #b5c0a4;
+  --color-sage-400: #96a67f;
+  --color-sage-500: #7a8c62;
+  --color-sage-600: #5f6f4c;
+  --color-sage-700: #4a573d;
+  --color-sage-800: #3d4734;
+  --color-sage-900: #343c2e;
+  
+  --color-cream-50: #fdfcfa;
+  --color-cream-100: #f9f6f0;
+  --color-cream-200: #f3ede2;
+  --color-cream-300: #e8dece;
+  --color-cream-400: #d9c9b0;
+  
+  --color-terracotta-400: #c4785f;
+  --color-terracotta-500: #b5624a;
+  --color-terracotta-600: #9a4f3a;
+  
+  --color-slate-700: #374151;
+  --color-slate-800: #1f2937;
+  --color-slate-900: #111827;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    background: linear-gradient(135deg, var(--color-sage-800) 0%, var(--color-sage-900) 50%, var(--color-slate-900) 100%);
+    min-height: 100vh;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .card {
+    background: var(--color-cream-50);
+    border-radius: 1rem;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 20px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-sage-600) 0%, var(--color-sage-700) 100%);
+    color: white;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px 0 rgba(90, 111, 76, 0.3);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px 0 rgba(90, 111, 76, 0.4);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-sage-700);
+    font-weight: 600;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.75rem;
+    border: 2px solid var(--color-sage-300);
+    transition: all 0.2s ease;
+  }
+  
+  .btn-secondary:hover {
+    background: var(--color-sage-100);
+    border-color: var(--color-sage-400);
+  }
+  
+  .vignette-box {
+    background: linear-gradient(135deg, var(--color-cream-100) 0%, var(--color-cream-200) 100%);
+    border-left: 4px solid var(--color-sage-500);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: #374151;
+  }
+  
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    padding: 1rem 1.25rem;
+    background: white;
+    border: 2px solid var(--color-cream-300);
+    border-radius: 0.75rem;
+    text-align: left;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #1f2937;
+    letter-spacing: -0.01em;
+  }
+  
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--color-sage-400);
+    background: var(--color-sage-50);
+  }
+  
+  .option-btn.correct {
+    background: #d1fae5;
+    border-color: #10b981;
+    color: #065f46;
+  }
+  
+  .option-btn.incorrect {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #991b1b;
+  }
+  
+  .option-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--color-cream-200);
+    font-weight: 600;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+  
+  .explanation-box {
+    background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    color: #1e40af;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream-100);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sage-400);
 }
